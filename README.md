@@ -1,7 +1,7 @@
 [![Docker Hub](http://img.shields.io/badge/docker-hub-brightgreen.svg?style=flat)](https://registry.hub.docker.com/u/hopsoft/graphite-statsd/)
 [![Gratipay](http://img.shields.io/badge/gratipay-contribute-009bef.svg?style=flat)](https://gratipay.com/hopsoft/)
 
-# Docker Image for Graphite & Statsd
+# Docker Image for Graphite, Statsd & Grafana
 
 ## Get Graphite & Statsd (and Grafana) running instantly
 
@@ -29,7 +29,7 @@ That's it, you're done ... almost.
 
 If you want to install [Grafana](http://grafana.org/) as an alternative web frontend run the following in the docker container ([from Installing on Debian / Ubuntu](http://docs.grafana.org/installation/debian/)):
 
-Note: check if a newer version of grafana has been released 
+Note: Check if a [newer version](http://grafana.org/download/) of Grafana has been released before running the commands below
 ```
 $ wget https://grafanarel.s3.amazonaws.com/builds/grafana_2.1.3_amd64.deb
 $ sudo apt-get install -y adduser libfontconfig
