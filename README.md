@@ -3,10 +3,11 @@
 
 # Docker Image for Graphite & Statsd
 
-## Get Graphite & Statsd running instantly
+## Get Graphite & Statsd (and Grafana) running instantly
 
 Graphite & Statsd can be complex to setup.
 This image will have you running & collecting stats in just a few minutes.
+This fork adds instructions to add [Grafana](http://grafana.org/) as an alternative web frontend as well - [have a look at some grafana examples](http://play.grafana.org/).
 
 ## Quick Start
 
@@ -16,6 +17,7 @@ sudo docker run -d \
   --restart=always \
   -p 80:80 \
   -p 2003:2003 \
+  -p 3000:3000 \
   -p 8125:8125/udp \
   -p 8126:8126 \
   hopsoft/graphite-statsd
@@ -24,6 +26,15 @@ sudo docker run -d \
 This starts a Docker container named: **graphite**
 
 That's it, you're done ... almost.
+
+If you want to install [Grafana](http://grafana.org/) as an alternative web frontend run the following in the docker container ([from Installing on Debian / Ubuntu](http://docs.grafana.org/installation/debian/)):
+
+Note: check if a newer version of grafana has been released 
+```
+$ wget https://grafanarel.s3.amazonaws.com/builds/grafana_2.1.3_amd64.deb
+$ sudo apt-get install -y adduser libfontconfig
+$ sudo dpkg -i grafana_2.1.3_amd64.deb
+```
 
 ### Includes the following components
 
@@ -34,12 +45,13 @@ That's it, you're done ... almost.
 
 ### Mapped Ports
 
-| Host | Container | Service |
-| ---- | --------- | ------- |
-|   80 |        80 | nginx   |
-| 2003 |      2003 | carbon  |
-| 8125 |      8125 | statsd  |
-| 8126 |      8126 | admin   |
+| Host | Container | Service  |
+| ---- | --------- | -------- |
+|   80 |        80 | nginx    |
+| 2003 |      2003 | carbon   |
+| 3000 |      3000 | grafana* |
+| 8125 |      8125 | statsd   |
+| 8126 |      8126 | admin    |
 
 ### Mounted Volumes
 
@@ -86,6 +98,16 @@ Update the default Django admin user account. _The default is insecure._
 
 First login at: [http://localhost/account/login](http://localhost/account/login)
 Then update the root user's profile at: [http://localhost/admin/auth/user/1/](http://localhost/admin/auth/user/1/)
+
+## Secure the Grafana Admin
+
+Update the default Grafana admin user account. _The default is insecure._
+
+  * username: admin
+  * password: admin
+
+First login at: [http://localhost:4000](http://localhost:4000) then update the admin user's profile
+
 
 ## Change the Configuration
 
