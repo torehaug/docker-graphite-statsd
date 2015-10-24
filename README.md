@@ -7,7 +7,8 @@
 
 Graphite & Statsd can be complex to setup.
 This image will have you running & collecting stats in just a few minutes.
-This fork adds instructions to add [Grafana](http://grafana.org/) as an alternative web frontend as well - [have a look at some grafana examples](http://play.grafana.org/).
+
+This fork adds instructions to add [Grafana](http://grafana.org/) as an alternative web frontend as well - [have a look at some grafana examples](http://play.grafana.org/). Just the README has been changed - you need to run some additional commands in the docker image to get Grafana up and running.
 
 ## Quick Start
 
@@ -34,12 +35,18 @@ Note: Check if a [newer version](http://grafana.org/download/) of Grafana has be
 $ wget https://grafanarel.s3.amazonaws.com/builds/grafana_2.1.3_amd64.deb
 $ sudo apt-get install -y adduser libfontconfig
 $ sudo dpkg -i grafana_2.1.3_amd64.deb
+
+### In order to start grafana-server, execute
+$ sudo update-rc.d grafana-server defaults 95 10
+### In order to start grafana-server, execute
+$ sudo service grafana-server start
 ```
 
 ### Includes the following components
 
 * [Nginx](http://nginx.org/) - reverse proxies the graphite dashboard
 * [Graphite](http://graphite.readthedocs.org/en/latest/) - front-end dashboard
+* [Grafana](http://grafana.org/)* - alternative front-end dashboard for Graphite - not included in the image - must be installed (instructions above)
 * [Carbon](http://graphite.readthedocs.org/en/latest/carbon-daemons.html) - back-end
 * [Statsd](https://github.com/etsy/statsd/wiki) - UDP based back-end proxy
 
@@ -87,6 +94,10 @@ done
 ### Visualize the Data
 
 Open Graphite in a browser at [http://localhost/dashboard](http://localhost/dashboard).
+
+### Visualize the Data - With Grafana
+
+Open Grafana in a browser at [http://localhost:4000/](http://localhost:4000/) and add a Graphite datasource.
 
 ## Secure the Django Admin
 
